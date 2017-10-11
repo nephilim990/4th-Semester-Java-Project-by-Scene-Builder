@@ -5,11 +5,13 @@
  */
 package javafxmlapplication;
 
+import java.util.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.*;
 
 /**
  *
@@ -24,17 +26,47 @@ public class JavaFXMLApplication extends Application {
         launch(args);
     }
     
+    
+    public JavaFXMLApplication() {
+    }
+    
+    public static Stage mainStage;
+    public static Stage aboutStage;
+    public static Stage closeStage;
+    
+    
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
         
         Scene scene = new Scene(root);
         
-        stage.setScene(scene);
+        mainStage = stage;
         
-        stage.show();
+        mainStage.setTitle("English Vocabulary Trainer");
+        
+        mainStage.setScene(scene);
+        
+        
+        mainStage.show();
+        
+        mainStage.setOnCloseRequest(e -> {
+                e.consume();    //consume the default close button event for handling it manually
+                try{
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CloseAlert.fxml"));
+                    Parent root1 = (Parent) fxmlLoader.load();
+                    closeStage = new Stage();
+                    closeStage.setTitle("Confirm close");
+                    closeStage.initModality(Modality.APPLICATION_MODAL);
+                    closeStage.setScene(new Scene(root1));
+                    closeStage.show();
+                }
+                catch(Exception ex){
+                    ex.printStackTrace();
+                }
+            });
+        
     }
-
     
     
 }

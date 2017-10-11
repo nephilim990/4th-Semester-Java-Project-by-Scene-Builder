@@ -8,17 +8,50 @@ and open the template in the editor.
     Author     : Shahriar Ivan
 */
 .root{
-    -fx-background-color: #dddddd;
+    -fx-background-image: url("images/back6.jpg");
+    -fx-background-size: stretch;
 }
 
-.button{
-    -fx-background-radius: 10;
+.title-imagebox{
+    -fx-background-color: linear-gradient( to right, #a3d3d3 0% , #44a9c4 50% ,#2c77ab 100% );
+}
+
+.label{
+    -fx-font-size: 12pt;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    
+}
+
+.invalid-label{
+    -fx-font-size: 10pt;
+    -fx-text-fill: #ff0000;
+    
 }
 
 .exit-button{
-    -fx-background-color: #bb2323;
+    -fx-font-size: 14;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#ff1121, #771313);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    
+}
+
+.exit-button:hover{
+    -fx-background-color: linear-gradient(#772323, #ff1121);
+    -fx-background-radius: 6px;
 }
 
 .login-button{
-    -fx-background-color: #2323bb;
+    -fx-font-size: 16;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#519271, #61a2fe);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.login-button:hover{
+    -fx-background-color: linear-gradient(#61a2fe, #519271);
+    -fx-background-radius: 6px;
 }
