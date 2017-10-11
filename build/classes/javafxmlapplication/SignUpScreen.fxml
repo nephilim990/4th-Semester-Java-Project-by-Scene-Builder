@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="rootPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.SignUpScreenController">
+   <children>
+      <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@../loginScreen.css">
+         <children>
+            <HBox prefHeight="114.0" prefWidth="800.0" styleClass="title-imagebox" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <ImageView fitHeight="82.0" fitWidth="640.0">
+                     <image>
+                        <Image url="@../images/coollogo_com-262341321.png" />
+                     </image>
+                  </ImageView>
+                  <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <ImageView fitHeight="114.0" fitWidth="137.0">
+                     <image>
+                        <Image url="@../images/book2.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox layoutX="3.0" layoutY="168.0" prefHeight="27.0" prefWidth="828.0" spacing="40.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <Region prefHeight="27.0" prefWidth="162.0" HBox.hgrow="ALWAYS" />
+                  <Label minWidth="-Infinity" prefWidth="84.0" text="Username:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="newUserInput" minWidth="-Infinity" prefWidth="149.0" promptText="Type new username" />
+                  <Label fx:id="userInvalidText" minWidth="-Infinity" prefHeight="20.0" prefWidth="111.0" styleClass="invalid-label" text="*Type Username" textFill="RED" visible="false">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Region prefHeight="27.0" prefWidth="193.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox layoutX="3.0" layoutY="231.0" prefHeight="27.0" prefWidth="828.0" spacing="40.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="-3.0">
+               <children>
+                  <Region prefHeight="27.0" prefWidth="155.0" HBox.hgrow="ALWAYS" />
+                  <Label minWidth="-Infinity" prefHeight="25.0" prefWidth="69.0" text="Gender:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <RadioButton fx:id="maleButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="Male">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="GenderChoice" />
+                     </toggleGroup>
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="femaleButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="69.0" text="Female" toggleGroup="$GenderChoice">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font></RadioButton>
+                  <Label fx:id="genderInvalidText" minWidth="-Infinity" styleClass="invalid-label" text="*Select gender" textFill="RED" visible="false">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Region prefHeight="27.0" prefWidth="193.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox layoutX="-3.0" layoutY="300.0" prefHeight="27.0" prefWidth="807.0" spacing="40.0" AnchorPane.leftAnchor="-3.0" AnchorPane.rightAnchor="-4.0">
+               <children>
+                  <Region prefHeight="27.0" prefWidth="37.0" HBox.hgrow="ALWAYS" />
+                  <Label minWidth="-Infinity" prefHeight="27.0" prefWidth="118.0" text="Set Password:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="newPasswordInput" minWidth="-Infinity" prefWidth="149.0" promptText="Type new password" />
+                  <Region prefHeight="27.0" prefWidth="232.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox layoutX="3.0" layoutY="369.0" prefHeight="27.0" prefWidth="797.0" spacing="40.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <Region prefHeight="27.0" prefWidth="139.0" HBox.hgrow="ALWAYS" />
+                  <Label minWidth="-Infinity" prefHeight="27.0" prefWidth="148.0" text="Confirm Password:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="newPasswordConfirm" minWidth="-Infinity" prefWidth="149.0" promptText="Type password again" />
+                  <Label fx:id="passwordMismatchText" minWidth="-Infinity" styleClass="invalid-label" text="*Password does not match" textFill="RED" visible="false">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Region prefHeight="27.0" prefWidth="164.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox layoutX="-1.0" layoutY="451.0" prefHeight="44.0" prefWidth="807.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-6.0">
+               <children>
+                  <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="signupButton" mnemonicParsing="false" onAction="#signupButtonClicked" styleClass="login-button" text="Sign Up">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox layoutX="-2.0" layoutY="530.0" prefHeight="37.0" prefWidth="807.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="-5.0">
+               <children>
+                  <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="backToLogInButton" mnemonicParsing="false" onAction="#backToLogInButtonClicked" styleClass="exit-button" text="Back to Log In">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
