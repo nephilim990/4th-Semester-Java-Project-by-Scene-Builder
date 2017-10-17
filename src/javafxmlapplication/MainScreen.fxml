@@ -8,7 +8,6 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -37,7 +36,7 @@
                   </ImageView>
                </children>
             </HBox>
-            <TabPane layoutX="-5.0" layoutY="114.0" prefHeight="487.0" prefWidth="806.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-5.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="114.0">
+            <TabPane layoutX="-3.0" layoutY="114.0" prefHeight="487.0" prefWidth="806.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-3.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="114.0">
               <tabs>
                 <Tab text="Browse Words">
                   <content>
@@ -52,8 +51,8 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <TextField layoutX="113.0" layoutY="11.0" minWidth="-Infinity" prefHeight="25.0" prefWidth="237.0" AnchorPane.leftAnchor="113.0" AnchorPane.rightAnchor="49.0" />
-                                          <TableView layoutX="13.0" layoutY="60.0" prefHeight="382.0" prefWidth="333.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="53.0" AnchorPane.topAnchor="60.0">
+                                          <TextField fx:id="searchBox" layoutX="113.0" layoutY="11.0" minWidth="-Infinity" prefHeight="25.0" prefWidth="237.0" AnchorPane.leftAnchor="113.0" AnchorPane.rightAnchor="49.0" />
+                                          <TableView fx:id="recentTable" layoutX="14.0" layoutY="46.0" prefHeight="160.0" prefWidth="319.0">
                                             <columns>
                                               <TableColumn prefWidth="332.0" text="Recent Searches" />
                                             </columns>
@@ -61,11 +60,28 @@
                                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                              </columnResizePolicy>
                                           </TableView>
+                                          <TableView fx:id="wordTable" layoutX="14.0" layoutY="217.0" prefHeight="220.0" prefWidth="320.0">
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                             <columns>
+                                                <TableColumn fx:id="wordColumn" prefWidth="75.0" text="Word" />
+                                             </columns>
+                                          </TableView>
                                        </children>
                                     </AnchorPane>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                        <children>
-                                          <TextArea layoutX="41.0" layoutY="28.0" prefHeight="456.0" prefWidth="441.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <Label layoutX="81.0" layoutY="40.0" styleClass="header-label" text="Word:" />
+                                          <Label layoutX="30.0" layoutY="108.0" styleClass="header-label" text="Description:" />
+                                          <Label layoutX="11.0" layoutY="243.0" styleClass="header-label" text="Parts of speech:" />
+                                          <Label layoutX="83.0" layoutY="310.0" styleClass="header-label" text="Tags:" />
+                                          <Label fx:id="wordText" layoutX="154.0" layoutY="44.0" text="wordText" />
+                                          <Label fx:id="descriptionText" layoutX="150.0" layoutY="112.0" minWidth="-Infinity" prefWidth="240.0" text="descriptionText" wrapText="true" />
+                                          <Label fx:id="posText" layoutX="182.0" layoutY="247.0" text="posText" />
+                                          <Label fx:id="tagText" layoutX="158.0" layoutY="314.0" text="tagText" />
+                                          <Label layoutX="33.0" layoutY="374.0" styleClass="header-label" text="Synonyms:" />
+                                          <Label fx:id="synonymText" layoutX="150.0" layoutY="378.0" text="synonymText" />
                                        </children>
                                     </AnchorPane>
                                 </items>
@@ -76,7 +92,56 @@
                 </Tab>
                 <Tab text="Take a Test">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <HBox layoutX="-1.0" layoutY="104.0" prefHeight="42.0" prefWidth="806.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0">
+                                 <children>
+                                    <Region prefHeight="42.0" prefWidth="63.0" HBox.hgrow="ALWAYS" />
+                                    <Button id="record-sales" fx:id="beginTestButton" mnemonicParsing="false" onAction="#BeginTestButtonClicked" text="Begin Test" />
+                                    <Region prefHeight="42.0" prefWidth="26.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <HBox layoutY="177.0" prefHeight="175.0" prefWidth="806.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                 <children>
+                                    <Region prefHeight="175.0" prefWidth="222.0" HBox.hgrow="ALWAYS" />
+                                    <AnchorPane fx:id="questionPane" visible="false">
+                                       <children>
+                                          <HBox spacing="10.0">
+                                             <children>
+                                                <Label fx:id="questionNum" text="questionNum" />
+                                                <Label text=")" />
+                                                <Label fx:id="questionText" minWidth="-Infinity" prefWidth="420.0" text="questionText" wrapText="true" />
+                                             </children>
+                                          </HBox>
+                                          <Label layoutX="93.0" layoutY="63.0" text="A)" />
+                                          <Label layoutX="93.0" layoutY="154.0" text="B)" />
+                                          <Label layoutX="415.0" layoutY="63.0" text="C)" />
+                                          <Label layoutX="415.0" layoutY="154.0" text="D)" />
+                                          <Button fx:id="choiceA" layoutX="121.0" layoutY="59.0" mnemonicParsing="false" onAction="#ChoiceButtonClicked" text="choiceA" />
+                                          <Button fx:id="choiceB" layoutX="121.0" layoutY="150.0" mnemonicParsing="false" onAction="#ChoiceButtonClicked" text="choiceB" />
+                                          <Button fx:id="choiceC" layoutX="439.0" layoutY="59.0" mnemonicParsing="false" onAction="#ChoiceButtonClicked" text="choiceC" />
+                                          <Button fx:id="choiceD" layoutX="439.0" layoutY="150.0" mnemonicParsing="false" onAction="#ChoiceButtonClicked" text="choiceD" />
+                                       </children>
+                                    </AnchorPane>
+                                    <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="2.0" layoutY="57.0" mouseTransparent="true" prefHeight="179.0" prefWidth="800.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="4.0">
+                                 <children>
+                                    <Region prefHeight="114.0" prefWidth="316.0" HBox.hgrow="ALWAYS" />
+                                    <AnchorPane fx:id="resultPane" prefHeight="114.0" prefWidth="180.0" visible="false">
+                                       <children>
+                                          <Label layoutX="49.0" text="Test Complete" />
+                                          <Label layoutX="19.0" layoutY="44.0" text="Correct : " />
+                                          <Label fx:id="correct_num" layoutX="126.0" layoutY="44.0" text="correct_num" />
+                                          <Label layoutY="103.0" text="Current Rating:" />
+                                          <Label fx:id="current_rating" layoutX="121.0" layoutY="103.0" text="current_rating" />
+                                       </children>
+                                    </AnchorPane>
+                                    <Region prefHeight="114.0" prefWidth="253.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                           </children></AnchorPane>
                   </content>
                 </Tab>
                   <Tab text="Profile">

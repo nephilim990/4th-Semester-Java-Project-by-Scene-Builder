@@ -67,4 +67,7 @@ public class User {
     public int getRating(){
         return rating;
     }
+    public void addRating(int val){
+        rating  += val;
+    }
 }

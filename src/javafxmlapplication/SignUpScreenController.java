@@ -9,6 +9,9 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -103,19 +106,33 @@ public class SignUpScreenController implements Initializable {
         
         if(userFlag && genderFlag && passwordFlag){  //all three fields must be valid for registering new user
 
-            try {
-                BufferedWriter bw = new BufferedWriter(new FileWriter("src/user.txt",true));
-                bw.write(FXMLDocumentController.current_user.getName());
-                bw.newLine();
-                bw.write(FXMLDocumentController.current_user.getPass());
-                bw.newLine();
-                bw.write(FXMLDocumentController.current_user.getGender());
-                bw.newLine();
-                bw.write(Integer.toString(FXMLDocumentController.current_user.getRating()));
-                bw.newLine();
-                bw.close();
-               
-            } catch (Exception e) {
+//            try {
+//                BufferedWriter bw = new BufferedWriter(new FileWriter("src/user.txt",true));
+//                bw.write(FXMLDocumentController.current_user.getName());
+//                bw.newLine();
+//                bw.write(FXMLDocumentController.current_user.getPass());
+//                bw.newLine();
+//                bw.write(FXMLDocumentController.current_user.getGender());
+//                bw.newLine();
+//                bw.write(Integer.toString(FXMLDocumentController.current_user.getRating()));
+//                bw.newLine();
+//                bw.close();
+//               
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+            FXMLDocumentController.current_user.setRating(1000);
+            try{
+                Class.forName("oracle.jdbc.driver.OracleDriver");
+                Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/XE","ivan","ivan");
+
+                Statement stmt = conn.createStatement();
+                
+                stmt.executeUpdate("INSERT into userTable values('"+FXMLDocumentController.current_user.getName()+
+                        "', '"+FXMLDocumentController.current_user.getPass()+
+                        "', '"+FXMLDocumentController.current_user.getGender()+
+                        "', '"+Integer.toString(FXMLDocumentController.current_user.getRating())+"')");
+            }catch(Exception e){
                 e.printStackTrace();
             }
             

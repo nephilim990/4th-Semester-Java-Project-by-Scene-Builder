@@ -1,0 +1,9 @@
+medical
+military
+geography
+science
+food
+professions
+civics
+music
+law

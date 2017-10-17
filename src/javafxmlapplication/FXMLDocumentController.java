@@ -43,6 +43,8 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
+        loadUserFile();
+        
         FileReader in;
         BufferedReader buf = null;
 
@@ -72,37 +74,6 @@ public class FXMLDocumentController implements Initializable {
             
         }
         
-        /*
-        //testing database connectivity
-        System.out.println("Testing");
-        try{
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/XE","ivan","ivan");
-
-            Statement stmt = conn.createStatement();
-            
-//            stmt.executeUpdate("CREATE TABLE Dept(d_id int primary key,dept_name char(3))");
-//            stmt.executeUpdate("insert into Dept values('1','MCE')");
-//            stmt.executeUpdate("insert into Dept values('2','EEE')");
-//            stmt.executeUpdate("insert into Dept values('3','TVE')");
-//            stmt.executeUpdate("insert into Dept values('4','CSE')");
-//            stmt.executeUpdate("insert into Dept values('5','CEE')");
-//            stmt.executeUpdate("delete from Dept where d_id='3'");
-
-            ResultSet rset = stmt.executeQuery("select * from Dept order by d_id");
-            while(rset.next()){
-                int id = rset.getInt(1);
-                String dept_name = rset.getString(2);
-                System.out.println(id+" "+dept_name);
-            }
-            stmt.close();
-            conn.close();
-        }
-        catch(Exception sqle){
-            System.out.println("SQLException: "+sqle);
-        }
-        System.out.println("Testing ended");
-        */
     }
     
         
@@ -180,6 +151,43 @@ public class FXMLDocumentController implements Initializable {
     private void loadMainScreen() throws IOException{
         StackPane pane = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
         rootPane.getChildren().setAll(pane);
+    }
+    
+    //load user.txt from database
+    private void loadUserFile(){
+        try{
+            BufferedWriter bw = new BufferedWriter(new FileWriter("src/user.txt"));
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/XE","ivan","ivan");
+
+            Statement stmt = conn.createStatement();
+
+            ResultSet rset = stmt.executeQuery("select * from userTable");
+            while(rset.next()){
+                String username = rset.getString(1);
+                String password = rset.getString(2);
+                String gender = rset.getString(3);
+                int rating = rset.getInt(4);
+                System.out.println(username+" "+password+" "+gender+" "+rating);
+                
+                //writing each tuple as four lines in user.txt
+                bw.write(username);
+                bw.newLine();
+                bw.write(password);
+                bw.newLine();
+                bw.write(gender);
+                bw.newLine();
+                bw.write(Integer.toString(rating));
+                bw.newLine();
+                
+            }
+            bw.close();
+            stmt.close();
+            conn.close();
+        }
+        catch(Exception sqle){
+            System.out.println("SQLException: "+sqle);
+        }
     }
     
 }
