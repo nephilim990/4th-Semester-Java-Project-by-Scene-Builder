@@ -29,7 +29,7 @@
             </HBox>
             <Label layoutX="67.0" layoutY="152.0" text="Software Version:" />
             <Label layoutX="188.0" layoutY="152.0" text="0.0.0.0" />
-            <Label layoutX="67.0" layoutY="215.0" text="Developers:" underline="true" />
+            <Label layoutX="67.0" layoutY="215.0" styleClass="header-label" text="Developers:" underline="true" />
             <Label layoutX="95.0" layoutY="245.0" text="Shahriar Ivan, Islamic University of Technology, CSE-15" />
             <Label layoutX="95.0" layoutY="284.0" text="Fahim Shahriar Shakkhor, Islamic University of Technology, CSE-15" />
             <Label layoutX="95.0" layoutY="322.0" text="Ahsan Rejwan Zaman, Islamic University of Technology, CSE-15" />
